@@ -2,8 +2,19 @@
   <div id="article">
     <div id="edit-article" v-show="show">
       <div class>
-        <label for="article-title">标题：</label>
-        <input id="article-title" placeholder="请输入标题" type="text" v-model="articleReq.title">
+        <div style="margin-top: 15px;">
+          <el-select v-model="select" slot="prepend" placeholder="请选择失物类别">
+            <el-option label="一卡通" value="1"></el-option>
+            <el-option label="身份证" value="2"></el-option>
+            <el-option label="书" value="3"></el-option>
+            <el-option label="钥匙扣等小物品" value="4"></el-option>
+            <el-option label="其他" value="5"></el-option>
+          </el-select>
+          <el-radio-group v-model="radio1">
+            <el-radio :label="3">失物</el-radio>
+            <el-radio :label="6">拾物</el-radio>
+          </el-radio-group>
+        </div>
       </div>
       <mavon-editor class="editor" v-model="articleReq.content" ref="md" @imgAdd="$imgAdd"/>
       <button @click="submit()">提交</button>
@@ -75,7 +86,9 @@ export default {
       },
       articleCommentList: [],
       articleTest: { id: "" },
-      show: true
+      show: true,
+      radio1: '',
+      select: ''
     };
   },
   computed: {
@@ -169,3 +182,9 @@ export default {
   border-width: 1px;
   border-radius: 10%;
 }
+.el-select .el-input {
+    width: 130px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
+  }

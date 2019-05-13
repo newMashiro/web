@@ -4,10 +4,10 @@
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
       <el-form :inline="true" :model="filters">
         <el-form-item>
-          <el-input v-model="filters.userName" placeholder="姓名"></el-input>
+          <el-input v-model="filters.userName" placeholder="描述"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" v-on:click="getUsers">查询</el-button>
+          <el-button type="primary" v-on:click="getLosts">查询</el-button>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleAdd">新增</el-button>
@@ -24,11 +24,11 @@
     >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column type="index" width="60"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="350" sortable></el-table-column>
-      <el-table-column prop="sex" label="性别" width="200" :formatter="formatSex" sortable></el-table-column>
-      <el-table-column prop="qq" label="QQ" width="220" sortable></el-table-column>
-      <el-table-column prop="telephone" label="电话号码" width="400" sortable></el-table-column>
-      <el-table-column prop="description" label="角色描述" width="200" sortable></el-table-column>
+      <el-table-column prop="id" label="ID" width="100" sortable></el-table-column>
+      <el-table-column prop="kind" label="种类" width="200" :formatter="formatSex" sortable></el-table-column>
+      <el-table-column prop="description" label="描述" width="220" sortable></el-table-column>
+      <el-table-column prop="getPlace" label="拾到地点" width="150" sortable></el-table-column>
+      <el-table-column prop="place.placePosition" label="存放地点" width="200" sortable></el-table-column>
 
       <el-table-column label="操作" width="275">
         <template slot-scope="scope">
@@ -148,11 +148,11 @@ export default {
     //     },
     handleSizeChange(val) {
       this.pageSize = val;
-      this.getUsers();
+      this.getLosts();
     },
     handleCurrentChange(val) {
       this.curPage = val;
-      this.getUsers();
+      this.getLosts();
     },
     getRole(){
       getRole().then(res =>{
@@ -169,7 +169,9 @@ export default {
       //this.listLoading = true;
       //NProgress.start();
       getLostListPage(para).then(res => {
-        console.log(res.data.data.list);
+        this.losts = res.data.data.list;
+        this.total = res.data.data.total;
+        console.log(res.data.data.total);
         //this.listLoading = false;
         //NProgress.done();
       });
@@ -190,7 +192,7 @@ export default {
               message: "删除成功",
               type: "success"
             });
-            this.getUsers();
+            this.getLosts();
           });
         })
         .catch(() => {});
@@ -236,7 +238,7 @@ export default {
                 this.$refs["editForm"].resetFields();
                 //this.editFormVisible = false;
                 this.dialogFormVisible = false;
-                this.getUsers();
+                this.getLosts();
               });
             })
             .catch(e => {
@@ -272,7 +274,7 @@ export default {
                 this.$refs["editForm"].resetFields();
                 this.dialogFormVisible = false;
                 //this.addFormVisible = false;
-                this.getUsers();
+                this.getLosts();
               });
             })
             .catch(e => {
@@ -304,7 +306,7 @@ export default {
               message: "删除成功",
               type: "success"
             });
-            this.getUsers();
+            this.getLosts();
           });
         })
         .catch(() => {});

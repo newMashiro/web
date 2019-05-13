@@ -77,7 +77,7 @@ let routes = [
         leaf: true,//只有一个节点
         children: [
             { path: '/article', component: article, name: '失物招领模块'},
-            { path: '/articleDetail', component: articleDetail, name: '文章详情模块'}
+            { path: '/articleDetail', component: articleDetail, name: '失物招领模块'}
         ]
     },
     {
