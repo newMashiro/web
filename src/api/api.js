@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs'
 
-let base = 'http://localhost:8081';
+let base = 'http://10.0.95.226:8081';
 
 export const requestLogin = params => { return axios.post(`${base}/login`, qs.stringify(params)).then(res => res.data); };
 
@@ -38,3 +38,30 @@ export const addArticle = params => { return axios.post(`${base}/article/addArti
 export const praiseClicksAddOne = params => { return axios.post(`${base}/article/praiseClicksAddOne`, params ); };
 
 export const uploadPicture = params => { return axios.post(`${base}/article/uploadPicture`, params ); };
+
+/**
+ * 查询失物
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export const listNotClaim = params => {
+    return axios.post(`${base}/lost/notClaim`, params)
+}
+
+/**
+ * 查询拾物
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export const listClaim = params => {
+    return axios.post(`${base}/lost/claim`, params)
+}
+
+/**
+ * 根据用户id查询信息
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export const getUserById = params => {
+    return axios.post(`${base}/user/getUser/` + params.id)
+}

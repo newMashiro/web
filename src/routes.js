@@ -16,6 +16,7 @@ import lostInfo from './views/lostInfo/Lost.vue'
 import article from './views/article/Article.vue'
 import articleDetail from './views/article/articleDetail.vue'
 import {checkRole,ROLE_ENUM} from './api/permission'
+import Hall from "./views/hall/Hall";
 
 let routes = [
     {
@@ -28,6 +29,12 @@ let routes = [
         path: '/register',
         component: Register,
         name: '',
+        hidden: true
+    },
+    {
+        path: '/hall',
+        component: Hall,
+        name: 'hall',
         hidden: true
     },
     {
